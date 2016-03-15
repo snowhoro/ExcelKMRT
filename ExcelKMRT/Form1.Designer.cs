@@ -41,15 +41,21 @@
             this.label3 = new System.Windows.Forms.Label();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.yearNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(58, 284);
+            this.button1.Location = new System.Drawing.Point(58, 271);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(171, 41);
             this.button1.TabIndex = 0;
@@ -76,7 +82,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(100, 127);
+            this.numericUpDown1.Location = new System.Drawing.Point(104, 26);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(70, 20);
             this.numericUpDown1.TabIndex = 3;
@@ -88,7 +94,7 @@
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(176, 127);
+            this.numericUpDown2.Location = new System.Drawing.Point(180, 26);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(70, 20);
             this.numericUpDown2.TabIndex = 4;
@@ -101,23 +107,24 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 129);
+            this.label1.Location = new System.Drawing.Point(24, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.Size = new System.Drawing.Size(77, 13);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Random entre";
+            this.label1.Text = "Random entre:";
             // 
             // randomKM
             // 
             this.randomKM.AutoSize = true;
             this.randomKM.Checked = true;
             this.randomKM.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.randomKM.Location = new System.Drawing.Point(23, 104);
+            this.randomKM.Location = new System.Drawing.Point(187, 6);
             this.randomKM.Name = "randomKM";
             this.randomKM.Size = new System.Drawing.Size(85, 17);
             this.randomKM.TabIndex = 6;
             this.randomKM.Text = "Random KM";
             this.randomKM.UseVisualStyleBackColor = true;
+            this.randomKM.CheckedChanged += new System.EventHandler(this.randomKM_CheckedChanged);
             // 
             // monthComboBox
             // 
@@ -183,9 +190,9 @@
             // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(190, 101);
+            this.numericUpDown3.Location = new System.Drawing.Point(104, 52);
             this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(56, 20);
+            this.numericUpDown3.Size = new System.Drawing.Size(70, 20);
             this.numericUpDown3.TabIndex = 11;
             this.numericUpDown3.Value = new decimal(new int[] {
             49,
@@ -196,38 +203,86 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(128, 105);
+            this.label4.Location = new System.Drawing.Point(42, 56);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 12;
             this.label4.Text = "Lunes KM:";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.numericUpDown1);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.numericUpDown2);
+            this.groupBox1.Controls.Add(this.numericUpDown3);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(12, 94);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(269, 96);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.AllowMerge = false;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.progressBar});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 315);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.statusStrip1.Size = new System.Drawing.Size(293, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 14;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(100, 16);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(25, 10);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(203, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Busca el archivo o arrastralo a la ventana";
+            // 
             // Form1
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(293, 337);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.numericUpDown3);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.randomKM);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.yearNumber);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.monthComboBox);
-            this.Controls.Add(this.randomKM);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Excel KM RT";
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.yearNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,6 +303,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ToolStripProgressBar progressBar;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.Label label5;
     }
 }
 

@@ -1,34 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using xls = Microsoft.Office.Interop.Excel;
 using System.IO;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 namespace WindowsFormsApplication1
-{  
-    class Excel
+{
+    public class Excel
     {
-        xls.Application xlApp;
-        xls.Workbooks xlWorkBooks;
-        xls.Workbook xlWorkBook;
-        xls.Sheets xlSheets;
-        xls.Worksheet xlWorkSheet;
+        private xls.Application xlApp;
+        private xls.Workbooks xlWorkBooks;
+        private xls.Workbook xlWorkBook;
+        private xls.Sheets xlSheets;
+        private xls.Worksheet xlWorkSheet;
 
-        string filepath;
-        List<DateTime> monthDates;
-        int monthNumber;
-        string monthName;
-        int yearNumber;
-        int minValue;
-        int maxValue;
-        int lastDay;
-        bool RunTotalKM;
-        int mondayKM;
-        bool exists;
+        private string filepath;
+        private List<DateTime> monthDates;
+        private int monthNumber;
+        private string monthName;
+        private int yearNumber;
+        private int minValue;
+        private int maxValue;
+        private int lastDay;
+        private bool RunTotalKM;
+        private int mondayKM;
+        private bool exists;
+        public ToolStripProgressBar progressBar;
 
         public Excel(string _filepath, int _monthNumber, string _monthName, int _yearNumber, 
             int _minValue, int _maxValue, bool _RunTotalKM, int _mondayKM)
@@ -54,19 +52,46 @@ namespace WindowsFormsApplication1
             if (!CheckFile())
                 return;
 
+            progressBar.PerformStep();
+
             if (!OpenWorkSheet())
                 CreateWorkSheet();
 
+            progressBar.PerformStep();
+
             TitleBar();
+
+            progressBar.PerformStep();
+
             Dates();
+
+            progressBar.PerformStep();
+
             Formulas();
-            if(RunTotalKM)
+
+            progressBar.PerformStep();
+
+            if (RunTotalKM)
                 TotalKM();
+
+            progressBar.PerformStep();
+
             ResumenTotal();
+
+            progressBar.PerformStep();
+
             AdditionalData();
+
+            progressBar.PerformStep();
+
             Formats();
 
+            progressBar.PerformStep();
+
             SaveFile();
+
+            progressBar.PerformStep();
+
         }
         public void CloseExcel()
         {
@@ -99,12 +124,19 @@ namespace WindowsFormsApplication1
             xlWorkBook.Close(true,filepath,System.Reflection.Missing.Value);
             xlApp.Quit();
 
-            //MessageBox.Show("Excel creado, se encuentra en " + filename);
-            Process.Start(filepath);
+            DialogResult dRes = MessageBox.Show("Excel guardado, abrir el archivo?","Abrir archivo",MessageBoxButtons.YesNo);
+            if (dRes == DialogResult.Yes)
+                Process.Start(filepath);
         }
         private bool CheckFile()
         {
             xlWorkBooks = xlApp.Workbooks;
+
+            if (filepath == null)
+            {
+                MessageBox.Show("Agrega un archivo");
+                return false;
+            }
 
             bool isFileOpen;
             if (!isFileCreated())
